@@ -9,7 +9,7 @@ This project generates a random multible choice quiz, this was obtained by the f
 * For each correct answer the score will advance by 1.
 * For each incorrect answer the time left will have 5 seconds deducted.
 
-[URL] (https://bmowrey729.github.io/Password-Generator/)
+[URL] ( https://bmowrey729.github.io/Multiple-Choice-Quiz/)
 
 ![Screen Shot ](/assets/mult.PNG)
 
