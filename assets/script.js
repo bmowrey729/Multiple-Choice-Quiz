@@ -125,7 +125,6 @@ function clearScore() {
 }
 
 //button event for next question
-
 nextBtn.addEventListener('click', nextQuestion)
 function nextQuestion() {
     questionContainerEl.classList.remove('hide')
