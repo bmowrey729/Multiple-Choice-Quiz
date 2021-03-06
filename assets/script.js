@@ -1,10 +1,10 @@
-var clearWinLosses = document.getElementById ("clear")
+//all variable declared
+var clearWinLosses = document.getElementById("clear")
 var startBtn = document.getElementById("start-btn")
 var nextBtn = document.getElementById("next-btn")
 var newScore = document.getElementById("score")
 var newtime = document.getElementById("timeleft")
 var restartBtn = document.getElementById("restart-btn")
-
 var newInt = document.getElementById("int")
 var newWins = document.getElementById("wins")
 var newLosses = document.getElementById("losses")
@@ -13,19 +13,13 @@ var losses = localStorage.getItem("losses")
 var score = 0
 var timeleft = 30
 var int = localStorage.getItem("int")
-
-
-
+newInt.value = int
 var questionContainerEl = document.getElementById("question-container")
-
 var questionEl = document.getElementById('question')
 var answerBtnEl = document.getElementById("answer-buttons")
-
-
-
 var shuffledQuestions, currentQuestionIndex
 
-
+//several buttons assigned
 clearWinLosses.addEventListener('click', clearScore)
 startBtn.addEventListener('click', startGame)
 nextBtn.addEventListener('click', () => {
@@ -37,7 +31,7 @@ function restartGame() {
     document.location.reload(true)
 }
 
-
+//Game Started
 function startGame() {
     newScore.innerText = score
     newtime.innerText = timeleft
@@ -49,48 +43,36 @@ function startGame() {
     currentQuestionIndex = 0
     questionContainerEl.classList.remove('hide')
     countdown()
-    checkInitials()    
+    checkInitials()
     setNextQuestion()
 }
-function checkInitials(){
-    
-        
-            localStorage.setItem("int", int)
-            console.log (int + " initials")
-    }
-    
-
-
+//checking seconds left
 function countdown() {
     setInterval(function () {
         if (timeleft <= 0) {
             clearInterval(timeleft = 0)
             losses++
-   newLosses.textContent = losses
-   localStorage.setItem("losses", losses)
-
+            newLosses.textContent = losses
+            localStorage.setItem("losses", losses);
+            localStorage.setItem("int", newInt.value);
+            console.log(newInt.value + " initials")
 
             questionContainerEl.classList.add('hide')
+            nextBtn.classList.add('hide')
             restartBtn.classList.remove('hide')
-
-
             timeleft = 30
-
         }
         newtime.innerText = timeleft
         timeleft -= 1
     }, 1000)
 }
 
-
-
-
-
+// Assigning next random question
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex++])
 }
-
+//populating question container
 function showQuestion(question) {
 
     questionEl.innerText = question.question
@@ -108,7 +90,7 @@ function showQuestion(question) {
         answerBtnEl.appendChild(button)
     })
 }
-
+// clearing question container
 function resetState() {
     nextBtn.classList.add('hide')
     while (answerBtnEl.firstChild) {
@@ -116,7 +98,7 @@ function resetState() {
             (answerBtnEl.firstChild)
     }
 }
-
+// choosing an answer
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
@@ -136,19 +118,20 @@ function selectAnswer(e) {
 
     }
 }
-function clearScore(){
+// clearing local storage
+function clearScore() {
     localStorage.clear()
     newLosses.textContent = 0
 }
 
-
+//button event for next question
 
 nextBtn.addEventListener('click', nextQuestion)
 function nextQuestion() {
     questionContainerEl.classList.remove('hide')
     setNextQuestion()
 }
-
+//Question array
 var questions = [
     {
         question: 'What is a group of turkeys called?',
