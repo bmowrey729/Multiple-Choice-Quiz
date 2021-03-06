@@ -1,16 +1,21 @@
 var startBtn = document.getElementById("start-btn")
 var nextBtn = document.getElementById("next-btn")
+var newScore = document.getElementById("score")
+var newtime = document.getElementById("timeleft")
+var restartBtn = document.getElementById("restart-btn")
+var newWins = document.getElementById("wins")
+var newLosses = document.getElementById("losses")
+var wins = 0
+var losses = localStorage.getItem("losses")
 var score = 0
-//var indexEl = 0
+var timeleft = 30
+
 
 var questionContainerEl = document.getElementById("question-container")
 
 var questionEl = document.getElementById('question')
 var answerBtnEl = document.getElementById("answer-buttons")
-//var answerBtn1 = document.getElementById('btn1')
-//var answerBtn2 = document.getElementById('btn2')
-//var answerBtn3 = document.getElementById('btn3')
-//var answerBtn4 = document.getElementById('btn4')
+
 
 
 var shuffledQuestions, currentQuestionIndex
@@ -20,16 +25,48 @@ nextBtn.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
 })
-
+restartBtn.addEventListener('click', restartGame)
+function restartGame() {
+    document.location.reload(true)
+}
 
 function startGame() {
-
+    newScore.innerText = score
+    newtime.innerText = timeleft
+    newWins.innerText = wins
+    newLosses.innerText = losses
     startBtn.classList.add('hide')
+    restartBtn.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerEl.classList.remove('hide')
+    countdown()
     setNextQuestion()
 }
+
+function countdown() {
+    setInterval(function () {
+        if (timeleft <= 0) {
+            clearInterval(timeleft = 0)
+            losses++
+   newLosses.textContent = losses
+   localStorage.setItem("losses", losses)
+
+
+            questionContainerEl.classList.add('hide')
+            restartBtn.classList.remove('hide')
+
+
+            timeleft = 30
+
+        }
+        newtime.innerText = timeleft
+        timeleft -= 1
+    }, 1000)
+}
+
+
+
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex++])
@@ -38,16 +75,16 @@ function setNextQuestion() {
 function showQuestion(question) {
 
     questionEl.innerText = question.question
-    
+
     question.answers.forEach(answer => {
         const button = document.createElement('button')
         button.innerText = answer.text
         button.classList.add('btn')
 
-        if(answer.correct){
+        if (answer.correct) {
             button.dataset.correct = answer.correct
         }
-        
+
         button.addEventListener('click', selectAnswer)
         answerBtnEl.appendChild(button)
     })
@@ -64,15 +101,16 @@ function resetState() {
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
-    console.log (correct)
-    if (correct){
+    console.log(correct)
+    if (correct) {
         score++
-    }
-    console.log(score)
+        newScore.innerText = score
+    } else { timeleft = timeleft - 5 }
 
-    if (shuffledQuestions.length > currentQuestionIndex ) {
+
+    if (shuffledQuestions.length > currentQuestionIndex) {
         nextBtn.classList.remove('hide')
-        
+
     } else {
         startBtn.innerText = "Restart"
         startBtn.classList.remove('hide')
@@ -247,8 +285,8 @@ var questions = [
         ]
     },
 
-    
-    
+
+
     {
         question: 'How many people make up the U.S. electoral college?',
         answers: [
@@ -290,7 +328,7 @@ var questions = [
     },
 
 
-    
+
 
 ]
 
@@ -305,4 +343,4 @@ var questions = [
 
 
 
-        
+

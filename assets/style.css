@@ -16,13 +16,23 @@ body {
 .container{
     width: 600px;
     max-width: 80%;
-    height: 400px;
+    height: 600px;
     background-color: white;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
 }
 
+.container2{
+    width: 200px;
+    max-width: 80%;
+    height: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    margin-left: 25px;
+}
 .btn-grid{
     display: grid;
     grid-template-columns: repeat(2, auto);

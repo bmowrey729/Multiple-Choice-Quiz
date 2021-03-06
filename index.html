@@ -5,14 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./assets/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="./assets/style.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="./assets/style.css"/>  
 
     <title>Multiple Choice Test</title>
 </head>
+
 <body>
+            
+            
+       
     <div class = "container">
         <div id="question-container" class ="hide">
+            
             <div id="question">Question</div>
             <div id="answer-buttons" class="btn-grid">
                 <button id = "btn1" class="btn">Answer 1</button>
@@ -20,13 +24,32 @@
                 <button id = "btn3" class="btn">Answer 3</button>
                 <button id = "btn4" class="btn">Answer 4</button>  
             </div>
+
+            <h2>Time</h2>
+            <div id= "timeleft">timeleft</div>
+            <br>
+            <h2>Score</h2>
+            <div id= "score">Score</div>
         </div>
         <div class ="controls">
           <button id= "start-btn" class="start-btn btn">Start</button>  
           <button id= "next-btn" class=" hide next-btn btn ">Next</button>
+          <button id= "restart-btn" class=" hide restart-btn btn ">Restart</button>
         </div>
     </div>
+    <div class = "container2">
+        <h2>Wins</h2>
+        <div id= "wins"></div>
+        <h2>Losses</h2>
+        <div id= "losses"></div>
+        <br>
+        
+        
+    </div>
+    
 </body>
+
+
 <script src="./assets/script.js"></script>
 
 
