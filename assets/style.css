@@ -24,14 +24,19 @@ body {
 }
 
 .container2{
-    width: 200px;
+    width: 400px;
     max-width: 80%;
-    height: 200px;
+    height: 400px;
     background-color: white;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
     margin-left: 25px;
+}
+
+.int {
+    width: 10px;
+    max-width: 80%;
 }
 .btn-grid{
     display: grid;

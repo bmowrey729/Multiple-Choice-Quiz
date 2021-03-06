@@ -1,14 +1,19 @@
+var clearWinLosses = document.getElementById ("clear")
 var startBtn = document.getElementById("start-btn")
 var nextBtn = document.getElementById("next-btn")
 var newScore = document.getElementById("score")
 var newtime = document.getElementById("timeleft")
 var restartBtn = document.getElementById("restart-btn")
+
+var newInt = document.getElementById("int")
 var newWins = document.getElementById("wins")
 var newLosses = document.getElementById("losses")
-var wins = 0
+var wins = localStorage.getItem("wins")
 var losses = localStorage.getItem("losses")
 var score = 0
 var timeleft = 30
+var int = localStorage.getItem("int")
+
 
 
 var questionContainerEl = document.getElementById("question-container")
@@ -20,6 +25,8 @@ var answerBtnEl = document.getElementById("answer-buttons")
 
 var shuffledQuestions, currentQuestionIndex
 
+
+clearWinLosses.addEventListener('click', clearScore)
 startBtn.addEventListener('click', startGame)
 nextBtn.addEventListener('click', () => {
     currentQuestionIndex++
@@ -29,6 +36,7 @@ restartBtn.addEventListener('click', restartGame)
 function restartGame() {
     document.location.reload(true)
 }
+
 
 function startGame() {
     newScore.innerText = score
@@ -41,8 +49,17 @@ function startGame() {
     currentQuestionIndex = 0
     questionContainerEl.classList.remove('hide')
     countdown()
+    checkInitials()    
     setNextQuestion()
 }
+function checkInitials(){
+    
+        
+            localStorage.setItem("int", int)
+            console.log (int + " initials")
+    }
+    
+
 
 function countdown() {
     setInterval(function () {
@@ -64,6 +81,8 @@ function countdown() {
         timeleft -= 1
     }, 1000)
 }
+
+
 
 
 
@@ -116,6 +135,10 @@ function selectAnswer(e) {
         startBtn.classList.remove('hide')
 
     }
+}
+function clearScore(){
+    localStorage.clear()
+    newLosses.textContent = 0
 }
 
 
