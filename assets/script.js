@@ -42,8 +42,7 @@ function startGame() {
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerEl.classList.remove('hide')
-    countdown()
-    checkInitials()
+    countdown()    
     setNextQuestion()
 }
 //checking seconds left
